@@ -1,6 +1,17 @@
 # HackHPC20_TrafficVision
 TrafficVision project for data visualization and analytics the Atlanta area
 
+## Team Members
+
+*Daniel Lamb
+*Aparna Bhat
+*Kellen Hill
+
+## Team Mentors
+
+* Josh Kissel
+* Boyd Wilson
+
 ## Problem Statement
 
 * With an abundance of data detailing traffic related incidents from TrafficVision, what type of analysis and visualizations can be provided to best inform local DOT’s allocation of resources to best keep traffic running safely and efficiently
