@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Highcharts data from JSON Response</title>
+		<style>
+		body{
+			margin-top: 30px;
+			margin-left:40px;
+		}
+		</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>		
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	<script type="text/javascript">
+        $(function () {
+                var processed_json = new Array();   
+                $.getJSON('https://storage.googleapis.com/street_sweepers_hpc20/ChartFiles/Kellentest.json', function(data) {
+                 // Make codes uppercase to match the map data
+                function getPointCategoryName(point, dimension) {
+                  var series = point.series,
+                      isY = dimension === 'y',
+                      axis = series[isY ? 'yAxis' : 'xAxis'];
+                  return axis.categories[point[isY ? 'y' : 'x']];
+                }
+
+                 Highcharts.chart('container', {
+
+                  chart: {
+                      type: 'heatmap',
+                      marginTop: 40,
+                      marginBottom: 80,
+                      plotBorderWidth: 1
+                  },
+
+
+                  title: {
+                      text: 'Stopped Incidents in October (Cameras with Highest Incident Rates)'
+                  },
+
+                  xAxis: {
+                      categories: ['K_I-75 @ Callahan Rd - Knoxville ', 'C_I-24 @ S Moore Rd - Chattanooga', 'M_I-55 north of Shelby Dr. - Memphis', 'N_I-40 @ SR 840 JCT () (R3_202) - Nashville', 'N_65 S/O I-840 57.4 - Memphis - Nashville', 'C_I-24 @ Germantown Rd - Chattanooga', 'M_I-55 @ US 51, Elvis Presley - Memphis', 'K_I-75/640 @ Clinton Hwy - Knoxville', 'C_I-24 West of Lookout Creek - Chattanooga', 'K_I-40 @ I-275 - Knoxville']
+                  },
+
+                  yAxis: {
+                      categories: ['October'],
+                      title: null,
+                      reversed: true
+                  },
+
+                  accessibility: {
+                      point: {
+                          descriptionFormatter: function (point) {
+                              var ix = point.index + 1,
+                                  xName = getPointCategoryName(point, 'x'),
+                                  yName = getPointCategoryName(point, 'y'),
+                                  val = point.value;
+                              return ix + '. ' + xName + ' sales ' + yName + ', ' + val + '.';
+                          }
+                      }
+                  },
+
+                  colorAxis: {
+                      min: 0,
+                      minColor: '#FFFFFF',
+                      maxColor: Highcharts.getOptions().colors[0]
+                  },
+
+                  legend: {
+                      align: 'right',
+                      layout: 'vertical',
+                      margin: 0,
+                      verticalAlign: 'top',
+                      y: 25,
+                      symbolHeight: 280
+                  },
+
+                  tooltip: {
+                      formatter: function () {
+                          return '<b>' + getPointCategoryName(this.point, 'x') + '</b> registered <br><b>' +
+                              this.point.value + '</b> stopped vehicle instances in <br><b>' + getPointCategoryName(this.point, 'y') + '</b>';
+                      }
+                  },
+
+                  series: [{
+                      name: 'Sales per employee',
+                      borderWidth: 1,
+                      data: data,
+                      
+                      dataLabels: {
+                          enabled: true,
+                          color: '#000000'
+                      }
+                  }],
+
+                  responsive: {
+                      rules: [{
+                          condition: {
+                              maxWidth: 500
+                          },
+                          chartOptions: {
+                              yAxis: {
+                                  labels: {
+                                      formatter: function () {
+                                          return this.value.charAt(0);
+                                      }
+                                  }
+                              }
+                          }
+                      }]
+                  }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+   <div style="width: 800px; margin: 2em auto; padding: 1em; border: 1px solid red; border-radius: 0.5em">
+	Highcharts data load from a JSON using manual JSON Processing
+	</div>
+    <div id="container" style="height: 400px"></div>
+    
+</body>
+</html>
+    
