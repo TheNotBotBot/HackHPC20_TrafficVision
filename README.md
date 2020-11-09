@@ -3,9 +3,9 @@ TrafficVision project for data visualization and analytics the Atlanta area
 
 ## Team Members
 
-*Daniel Lamb
-*Aparna Bhat
-*Kellen Hill
+* Daniel Lamb
+* Aparna Bhat
+* Kellen Hill
 
 ## Team Mentors
 
