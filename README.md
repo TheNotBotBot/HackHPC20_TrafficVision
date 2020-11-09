@@ -19,6 +19,6 @@ TrafficVision project for data visualization and analytics the Atlanta area
 
 ## Gratitude
 
-Thank you to all of the mentors and special thanks to our mentors Boyd and Josh!
-Thank you to all the supporting organizations!
-Thank you to SC20 for this amazing opportunity!
+* Thank you to all of the mentors and special thanks to our mentors Boyd and Josh!
+* Thank you to all the supporting organizations!
+* Thank you to SC20 for this amazing opportunity!
